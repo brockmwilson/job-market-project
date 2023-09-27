@@ -6,7 +6,7 @@ library(pacman)
 p_load(ggrepel, data.table, tidyverse)
 
 p_load(data.table, dtplyr, dplyr, ggplot2, tm,
-       SnowballC, wordcloud, RColorBrewer,
+       SnowballC, wordcloud, RColorBrewer, ggeasy,
        knitr, kableExtra, fixest, modelsummary, 
        broom, purrr, Synth, qte, ggthemes, ggridges, here)
 
@@ -79,69 +79,79 @@ ggplot(data = joe_acad2_data %>%
            y = cumsum)) +
   geom_line() +
   geom_point() +
-  graph_theme
+  graph_theme +
+  xlab(" ") +
+  ylab("Count") +
+  ggtitle("Job posted by date and type") +
+  easy_center_title() +
+  scale_color_discrete(" ",
+                       labels = c("Other", "Assistant professor or post doc")
+                       ) +
+  theme(legend.position = "bottom")
 
-ggplot(data = joe_loc_data %>%
-         filter(date < cutoff_date),
-       aes(x = date,
-           y = cumsum)) +
-  geom_line() +
-  geom_point() +
-  facet_wrap(~ loc, scales = "free_y") +
-  graph_theme
+# GRAPHS BELOW NEED TO BE CLEANED
 
-ggplot(data = joe_field_data %>%
-         filter(date < cutoff_date),
-       aes(x = date,
-           y = cumsum)) +
-  geom_line() +
-  geom_point() +
-  facet_wrap(~ field, scales = "free_y") +
-  graph_theme
-
-ggplot(data = joe_data2,
-       aes(x = date,
-           y = obs)) +
-  geom_col(position = "stack") +
-  graph_theme
-
-ggplot(data = joe_data2,
-       aes(x = date,
-           y = cumsum)) +
-  geom_col(position = "stack") +
-  geom_vline(xintercept = ref_date, color = "red") +
-  graph_theme
-
-ggplot(data = joe_data,
-       aes(x = date,
-           y = cumsum)) +
-  geom_line() +
-  geom_vline(xintercept = ref_date, color = "red") +
-  graph_theme
-
-ggplot(data = joe_data %>%
-         filter(date < cutoff_date),
-       aes(x = date,
-           y = cumsum/max(cumsum))) +
-  geom_line() +
-  geom_vline(xintercept = ref_date, color = "red") +
-  graph_theme
-
-ggplot(data = joe_data %>%
-         filter(date < cutoff_date),
-       aes(x = date,
-           y = cumsum)) +
-  geom_line() +
-  geom_vline(xintercept = ref_date, color = "red") +
-  graph_theme
-
-ggplot(data = joe_data %>%
-         filter(date < cutoff_date),
-       aes(x = date,
-           y = cumsum)) +
-  geom_line() +
-  geom_vline(xintercept = ref_date, color = "red") +
-  graph_theme
+# ggplot(data = joe_loc_data %>%
+#          filter(date < cutoff_date),
+#        aes(x = date,
+#            y = cumsum)) +
+#   geom_line() +
+#   geom_point() +
+#   facet_wrap(~ loc, scales = "free_y") +
+#   graph_theme
+# 
+# ggplot(data = joe_field_data %>%
+#          filter(date < cutoff_date),
+#        aes(x = date,
+#            y = cumsum)) +
+#   geom_line() +
+#   geom_point() +
+#   facet_wrap(~ field, scales = "free_y") +
+#   graph_theme
+# 
+# ggplot(data = joe_data2,
+#        aes(x = date,
+#            y = obs)) +
+#   geom_col(position = "stack") +
+#   graph_theme
+# 
+# ggplot(data = joe_data2,
+#        aes(x = date,
+#            y = cumsum)) +
+#   geom_col(position = "stack") +
+#   geom_vline(xintercept = ref_date, color = "red") +
+#   graph_theme
+# 
+# ggplot(data = joe_data,
+#        aes(x = date,
+#            y = cumsum)) +
+#   geom_line() +
+#   geom_vline(xintercept = ref_date, color = "red") +
+#   graph_theme
+# 
+# ggplot(data = joe_data %>%
+#          filter(date < cutoff_date),
+#        aes(x = date,
+#            y = cumsum/max(cumsum))) +
+#   geom_line() +
+#   geom_vline(xintercept = ref_date, color = "red") +
+#   graph_theme
+# 
+# ggplot(data = joe_data %>%
+#          filter(date < cutoff_date),
+#        aes(x = date,
+#            y = cumsum)) +
+#   geom_line() +
+#   geom_vline(xintercept = ref_date, color = "red") +
+#   graph_theme
+# 
+# ggplot(data = joe_data %>%
+#          filter(date < cutoff_date),
+#        aes(x = date,
+#            y = cumsum)) +
+#   geom_line() +
+#   geom_vline(xintercept = ref_date, color = "red") +
+#   graph_theme
 
 # Word Map ----
 
